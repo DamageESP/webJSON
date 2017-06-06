@@ -1,0 +1,51 @@
+title = "myScripts";
+headData = [
+  {
+    "type": "application/javascript",
+    "url": "js/index.js"
+  },
+  {
+    "type": "application/javascript",
+    "url": "js/webJSON.js"
+  },
+  {
+    "type": "application/javascript",
+    "url": "js/myscript.js"
+  }
+];
+elements = {
+  "elem": [
+    {
+      "type": "div",
+      "text": "hey broder",
+      "attrs": [
+        {
+          "type": "style",
+          "value": "background:blue;color:white;"
+        }
+      ],
+      "elem": [
+        {
+          "type": "button",
+          "text": "pagina 2",
+          "attrs": [
+            {
+              "type": "onclick",
+              "value": "changeTo('pag2')"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "h1",
+      "text": "titulo json",
+      "attrs": [
+        {
+          "type": "style",
+          "value": "color:lightblue;"
+        }
+      ]
+    }
+  ]
+};

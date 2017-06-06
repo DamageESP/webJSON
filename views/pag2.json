@@ -1,0 +1,50 @@
+title = "myScripts2";
+headData = [
+  {
+    "type": "application/javascript",
+    "url": "js/index.js"
+  },
+  {
+    "type": "application/javascript",
+    "url": "js/webJSON.js"
+  },
+  {
+    "type": "application/javascript",
+    "url": "js/myscript2.js"
+  }
+];
+elements = {
+  "elem": [
+    {
+      "type": "p",
+      "text": "parrafo",
+      "attrs": [
+        {
+          "type": "class",
+          "value": "parrafo"
+        }
+      ],
+      "elem": [
+        {
+          "type": "button",
+          "text": "pagina 1",
+          "attrs": [
+            {
+              "type": "onclick",
+              "value": "changeTo('pag1')"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "img",
+      "attrs": [
+        {
+          "type": "src",
+          "value": "https://www.w3schools.com/images/colorpicker.gif"
+        }
+      ]
+    }
+  ]
+};
