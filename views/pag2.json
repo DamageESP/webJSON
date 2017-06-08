@@ -5,11 +5,11 @@ headData = [{
       "attrs": [
         {
           "type": "type",
-          "value": "application/json"
+          "value": "application/javascript"
         },
         {
-          "type": "url",
-          "value": "views/pag2.json"
+          "type": "src",
+          "value": "js/myscript2.js"
         }
       ]
   }]

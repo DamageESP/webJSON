@@ -1,7 +1,7 @@
 function webJSON() {
-
+  this.list = elements;
   // Loop elems
-  this.loopElems = function(list = elements, parent = document.getElementsByTagName("body")[0]) {
+  this.loopElems = function(list = this.list, parent = document.getElementsByTagName("body")[0]) {
     for (var i=0; i<list.length; i++) {
       if (!list[i].type) {
         loopElems(list[i].elem, parent);
@@ -17,19 +17,10 @@ function webJSON() {
     }
   }
 
-  // Check for child elements
-  this.createChildren = function(elem) {
-    if (elem.elem) {
-      loopElems(elem.elem, elem);
-    }
-    else {
-      return false;
-    }
-  }
-
   // Create element
   this.createElement = function(elem, parent) {
         this.newElem = document.createElement(elem.type);
+        // Set innerHTML via .text property
         if (elem.text) {
           this.newElem.innerHTML = elem.text;
         }
@@ -41,33 +32,29 @@ function webJSON() {
         }
         parent.appendChild(this.newElem);
         return this.newElem;
-      // Create the element
-      // Set innerHTML via .text property
   }
 
   // Populate HEAD with scripts
   this.head = function(data = headData) {
     document.head.innerHTML = "";
     for (var i=0; i<data.length; i++) {
-      var newHead = this.createElement(data[i].elem[0], document.head);
+      this.createElement(data[i].elem[0], document.head);
     }
-    return newHead;
   }
 
   // Change JSON source file
   this.changeTo = function(file) {
-    this.head(headData);
     var jsElm = document.createElement("script");
-    jsElm.id = "elems";
     jsElm.type = "application/javascript";
     jsElm.src = "views/"+file+".json";
     document.head.appendChild(jsElm);
     document.body.innerHTML = "";
-    this.init();
+    setTimeout(this.init, 5);
   }
 
   // Initiate process
   this.init = function() {
+    this.list = elements;
     this.head(headData);
     document.title = title;
     this.loopElems();

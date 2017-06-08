@@ -8,20 +8,7 @@ headData = [{
           "value": "application/javascript"
         },
         {
-          "type": "url",
-          "value": "views/pag2.json"
-        }
-      ]
-  }],
-  "elem": [{
-      "type": "script",
-      "attrs": [
-        {
-          "type": "type",
-          "value": "application/javascript"
-        },
-        {
-          "type": "url",
+          "type": "src",
           "value": "https://code.jquery.com/jquery-3.2.1.min.js"
         },
         {
@@ -44,7 +31,7 @@ headData = [{
           "value": "application/javascript"
         },
         {
-          "type": "url",
+          "type": "src",
           "value": "js/webJSON.js"
         }
       ]
@@ -59,8 +46,23 @@ headData = [{
           "value": "application/javascript"
         },
         {
-          "type": "url",
+          "type": "src",
           "value": "js/index.js"
+        }
+      ]
+  }]
+},
+{
+  "elem": [{
+      "type": "script",
+      "attrs": [
+        {
+          "type": "type",
+          "value": "application/javascript"
+        },
+        {
+          "type": "src",
+          "value": "js/myscript.js"
         }
       ]
   }]
@@ -76,6 +78,10 @@ headData = [{
         {
           "type": "href",
           "value": "css/style.css"
+        },
+        {
+          "type": "type",
+          "value": "text/css"
         }
       ]
   }]
@@ -123,6 +129,10 @@ elements = [{
     "text": "mi h2",
     },{
       "type": "button",
-      "text": "hey"
+      "text": "hey",
+      "attrs": [{
+        "type": "onclick",
+        "value": "myFunction()"
+        }]
       }]
   }]
