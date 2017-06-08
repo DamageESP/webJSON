@@ -2,19 +2,25 @@ function webJSON() {
 
   // Loop elems
   this.loopElems = function(list = elements, parent = document.getElementsByTagName("body")[0]) {
-    for (var i=0; i<list.elem.length; i++) {
-      this.newElem = createElement(list.elem[i]);
-      parent && parent.appendChild(this.newElem);
-      if (hasChild(list.elem[i])) {
-        loopElems(list.elem[i], this.newElem);
+    for (var i=0; i<list.length; i++) {
+      if (!list[i].type) {
+        loopElems(list[i].elem, parent);
+      }
+      else
+      {
+        this.newElem = createElement(list[i], parent);
+        if (list[i].elem) {
+          parent = this.newElem;
+          loopElems(list[i].elem, parent);
+        }
       }
     }
   }
 
   // Check for child elements
-  this.hasChild = function(elem) {
-    if ("elem" in elem) {
-      return true;
+  this.createChildren = function(elem) {
+    if (elem.elem) {
+      loopElems(elem.elem, elem);
     }
     else {
       return false;
@@ -22,39 +28,36 @@ function webJSON() {
   }
 
   // Create element
-  this.createElement = function(elem) {
-    this.newElem = document.createElement(elem.type);
-    // Create the element
-    // Set innerHTML via .text property
-    if (elem.text) {
-      this.newElem.innerHTML = elem.text;
-    }
-    // Set attributes
-    if (elem.attrs) {
-      for (var i = 0; i < elem.attrs.length; i++) {
-        this.newElem.setAttribute(elem.attrs[i].type, elem.attrs[i].value);
-      }
-    }
-    return this.newElem;
+  this.createElement = function(elem, parent) {
+        this.newElem = document.createElement(elem.type);
+        if (elem.text) {
+          this.newElem.innerHTML = elem.text;
+        }
+        // Set attributes
+        if (elem.attrs) {
+          for (var j = 0; j < elem.attrs.length; j++) {
+            this.newElem.setAttribute(elem.attrs[j].type, elem.attrs[j].value);
+          }
+        }
+        parent.appendChild(this.newElem);
+        return this.newElem;
+      // Create the element
+      // Set innerHTML via .text property
   }
 
   // Populate HEAD with scripts
-  this.head = function(data) {
+  this.head = function(data = headData) {
     document.head.innerHTML = "";
     for (var i=0; i<data.length; i++) {
-      var newHead = document.createElement("script");
-      newHead.type = data[i].type;
-      newHead.src = data[i].url;
-      document.head.appendChild(newHead);
+      var newHead = this.createElement(data[i].elem[0], document.head);
     }
+    return newHead;
   }
 
   // Change JSON source file
   this.changeTo = function(file) {
-    var jsElm = document.getElementById("elems");
-    jsElm.remove();
     this.head(headData);
-    jsElm = document.createElement("script");
+    var jsElm = document.createElement("script");
     jsElm.id = "elems";
     jsElm.type = "application/javascript";
     jsElm.src = "views/"+file+".json";
@@ -65,6 +68,7 @@ function webJSON() {
 
   // Initiate process
   this.init = function() {
+    this.head(headData);
     document.title = title;
     this.loopElems();
   }
