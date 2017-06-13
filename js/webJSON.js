@@ -4,14 +4,14 @@ function webJSON() {
   this.loopElems = function(list = this.list, parent = document.getElementsByTagName("body")[0]) {
     for (var i=0; i<list.length; i++) {
       if (!list[i].type) {
-        loopElems(list[i].elem, parent);
+        this.loopElems(list[i].elem, parent);
       }
       else
       {
-        this.newElem = createElement(list[i], parent);
+        this.newElem = this.createElement(list[i], parent);
         if (list[i].elem) {
           parent = this.newElem;
-          loopElems(list[i].elem, parent);
+          this.loopElems(list[i].elem, parent);
         }
       }
     }
@@ -44,20 +44,29 @@ function webJSON() {
 
   // Change JSON source file
   this.changeTo = function(file) {
-    var jsElm = document.createElement("script");
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "views/"+file+".json");
+    xhr.responseType = "json";
+    xhr.send();
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+        var data = xhr.response;
+        console.log(data);
+      }
+    }
+    /*var jsElm = document.createElement("script");
     jsElm.type = "application/javascript";
     jsElm.src = "views/"+file+".json";
     document.head.appendChild(jsElm);
     document.body.innerHTML = "";
-    setTimeout(this.init, 5);
+    this.init();*/
   }
 
   // Initiate process
   this.init = function() {
     this.list = elements;
-    this.head(headData);
+    headData && this.head(headData);
     document.title = title;
     this.loopElems();
   }
-  return this;
 }

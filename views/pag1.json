@@ -24,6 +24,36 @@ headData = [{
 },
 {
   "elem": [{
+      "type": "link",
+      "attrs": [
+        {
+          "type": "rel",
+          "value": "stylesheet"
+        },
+        {
+          "type": "href",
+          "value": "css/style.css"
+        }
+      ]
+  }]
+},
+{
+  "elem": [{
+      "type": "link",
+      "attrs": [
+        {
+          "type": "rel",
+          "value": "icon"
+        },
+        {
+          "type": "href",
+          "value": "img/fav1.png"
+        }
+      ]
+  }]
+},
+{
+  "elem": [{
       "type": "script",
       "attrs": [
         {
@@ -66,25 +96,6 @@ headData = [{
         }
       ]
   }]
-},
-{
-  "elem": [{
-      "type": "link",
-      "attrs": [
-        {
-          "type": "rel",
-          "value": "stylesheet"
-        },
-        {
-          "type": "href",
-          "value": "css/style.css"
-        },
-        {
-          "type": "type",
-          "value": "text/css"
-        }
-      ]
-  }]
 }];
 elements = [{
   "elem": [{
@@ -92,30 +103,76 @@ elements = [{
     "attrs": [{
       "type": "style",
       "value": "background:blue"
-      }],
+      },
+      {
+        "type": "class",
+        "value": "parrafo"
+        }],
     "elem": [{
       "type": "button",
-      "text": "1",
+      "text": "pag2",
       "attrs": [{
         "type": "onclick",
-        "value": "changeTo('pag2')"
+        "value": "web.changeTo('pag2')"
         }]
       },
       {
       "type": "button",
-      "text": "2"
+      "text": "pag3",
+      "attrs": [{
+        "type": "onclick",
+        "value": "web.changeTo('pag3')"
+        }]
       },
       {
         "type": "p",
-        "text": "dentro de blue hehe",
+        "text": "busca",
         "attrs": [{
-          "type": "style",
-          "value": "color:green"
-          },{
+          "type": "id",
+          "value": "parrafo"
+          }],
+        "elem": [{
+          "type":"input",
+          "attrs": [{
+            "type": "type",
+            "value": "text"
+            },
+            {
             "type": "id",
-            "value": "parrafo"
+            "value": "q"
             }]
+          },
+          {
+            "type":"input",
+            "attrs": [{
+              "type": "type",
+              "value": "number"
+              },
+              {
+              "type": "id",
+              "value": "maxR"
+              },
+              {
+              "type": "value",
+              "value": "5"
+              }]
+            },
+          {
+            "type": "button",
+            "text": "x",
+            "attrs": [{
+              "type": "onclick",
+              "value": "ytList.clear()"
+            }]
+          }]
         }]
+    }]
+  },
+  {
+    "type": "div",
+    "attrs": [{
+      "type": "id",
+      "value": "results"
     }]
   },
   {

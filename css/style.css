@@ -1,3 +1,7 @@
 .parrafo {
   font-size: 2em;
 }
+.video {
+  background: lightblue;
+  border: 1px solid black;
+}

@@ -1,0 +1,83 @@
+title = "myScripts";
+
+elements = [{
+  "elem": [{
+    "type": "div",
+    "text": "y0",
+    "attrs": [{
+      "type": "style",
+      "value": "background:yellow"
+      },
+      {
+        "type": "class",
+        "value": "parrafo"
+        }],
+    "elem": [{
+      "type": "button",
+      "text": "pag2",
+      "attrs": [{
+        "type": "onclick",
+        "value": "web.changeTo('pag2')"
+        }]
+      },
+      {
+      "type": "button",
+      "text": "pag1",
+      "attrs": [{
+        "type": "onclick",
+        "value": "web.changeTo('pag1')"
+        }]
+      },
+      {
+        "type": "p",
+        "text": "pag 3 lok0",
+        "attrs": [{
+            "type": "id",
+            "value": "parrafo"
+            }]
+        }]
+    },
+    {
+      "elem": [{
+        "type": "iframe",
+        "attrs": [{
+          "type": "width",
+          "value": "560"
+          },
+          {
+            "type": "height",
+            "value": "315"
+          },
+          {
+            "type": "src",
+            "value": "https://www.youtube-nocookie.com/embed/Tm_-SAbcEDc?rel=0&amp;controls=0&amp;showinfo=0"
+          },
+          {
+            "type": "frameborder",
+            "value": "0"
+          },
+          {
+            "type": "allowfullscreen",
+            "value": ""
+        }]
+      }]
+    }]
+  },
+  {
+  "elem": [{
+    "type": "h1",
+    "text": "mi h1"
+    }]
+  },{
+  "elem": [{
+    "type": "h2",
+    "text": "mi h2",
+    },{
+      "type": "button",
+      "text": "hey",
+      "attrs": [{
+        "type": "onclick",
+        "value": "myFunction()"
+        }]
+      }]
+  }]

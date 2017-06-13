@@ -24,7 +24,7 @@ headData = [{
         },
         {
           "type": "href",
-          "value": "css/style.css"
+          "value": "css/style2.css"
         }
       ]
   }]
@@ -42,8 +42,16 @@ elements = [{
           "text": "pagina 1",
           "attrs": [{
               "type": "onclick",
-              "value": "changeTo('pag1')"
+              "value": "web.changeTo('pag1')"
             }]
+        },
+      {
+        "type": "button",
+        "text": "pag3",
+        "attrs": [{
+            "type": "onclick",
+            "value": "web.changeTo('pag3')"
+          }]
         }]
     }],
   },
