@@ -189,14 +189,15 @@
   },{
   "elem": [{
     "type": "h2",
-    "text": "mi h2",
-    },{
-      "type": "button",
-      "text": "hey",
-      "attrs": [{
-        "type": "onclick",
-        "value": "myFunction()"
-        }]
+    "text": "mi h2"
+    },
+    {
+    "type": "button",
+    "text": "hey",
+    "attrs": [{
+      "type": "onclick",
+      "value": "myFunction()"
       }]
+    }]
   }]
 }]

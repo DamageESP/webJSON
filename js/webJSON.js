@@ -1,15 +1,5 @@
 function webJSON() {
-  this.content = new XMLHttpRequest();
-  this.content.open("GET", "https://damageesp.github.io/webJSON/views/pag1.json");
-  this.content.responseType = "json";
-  this.content.send();
-  this.content.onreadystatechange = function() {
-    if (this.content.readyState === 4) {
-      this.content = this.content.response;
-    }
-  }
-  this.list = this.content.elements;
-  console.log(this.content);
+
   // Loop elems
   this.loopElems = function(list = this.list, parent = document.getElementsByTagName("body")[0]) {
     for (var i=0; i<list.length; i++) {
@@ -74,9 +64,22 @@ function webJSON() {
 
   // Initiate process
   this.init = function() {
-    this.list = content.elements;
-    content.headData && this.head(content.headData);
-    document.title = content.title;
-    this.loopElems();
+    return new Promise(function(resolve, reject) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "https://damageesp.github.io/webJSON/views/pag1.json");
+      xhr.responseType = "text";
+      xhr.send();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          resolve(xhr.response);
+        }
+        console.log(JSON.parse(xhr.response));
+      }
+      this.list = xhr.elements;
+    })
+  /*  this.list = this.xhr.elements;
+    this.xhr.headData && this.head(this.xhr.headData);
+    document.title = this.xhr.title;
+    this.loopElems();*/
   }
 }
