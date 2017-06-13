@@ -1,5 +1,15 @@
 function webJSON() {
-  this.list = elements;
+  this.content = new XMLHttpRequest();
+  this.content.open("GET", "https://damageesp.github.io/webJSON/views/pag1.json");
+  this.content.responseType = "json";
+  this.content.send();
+  this.content.onreadystatechange = function() {
+    if (this.content.readyState === 4) {
+      this.content = this.content.response;
+    }
+  }
+  this.list = this.content.elements;
+  console.log(this.content);
   // Loop elems
   this.loopElems = function(list = this.list, parent = document.getElementsByTagName("body")[0]) {
     for (var i=0; i<list.length; i++) {
@@ -38,15 +48,15 @@ function webJSON() {
   this.head = function(data = headData) {
     document.head.innerHTML = "";
     for (var i=0; i<data.length; i++) {
-      this.createElement(data[i].elem[0], document.head);
+      this.loopElems(data[i].elem, document.head);
     }
   }
 
   // Change JSON source file
   this.changeTo = function(file) {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "views/"+file+".json");
-    xhr.responseType = "json";
+    xhr.open("GET", "https://damageesp.github.io/webJSON/views/"+file+".json");
+    xhr.responseType = "text";
     xhr.send();
     xhr.onreadystatechange = function() {
       if (xhr.readyState === 4) {
@@ -64,9 +74,9 @@ function webJSON() {
 
   // Initiate process
   this.init = function() {
-    this.list = elements;
-    headData && this.head(headData);
-    document.title = title;
+    this.list = content.elements;
+    content.headData && this.head(content.headData);
+    document.title = content.title;
     this.loopElems();
   }
 }

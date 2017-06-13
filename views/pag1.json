@@ -1,25 +1,29 @@
-title = "myScripts";
-headData = [{
-  "elem": [{
-      "type": "script",
-      "attrs": [
-        {
-          "type": "type",
-          "value": "application/javascript"
-        },
-        {
-          "type": "src",
-          "value": "https://code.jquery.com/jquery-3.2.1.min.js"
-        },
-        {
-          "type": "integrity",
-          "value": "sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        },
-        {
-          "type": "crossorigin",
-          "value": "anonymous"
-        }
-      ]
+[
+{
+  "title":"myScripts"
+},
+{
+  "headData": [{
+    "elem": [{
+        "type": "script",
+        "attrs": [
+          {
+            "type": "type",
+            "value": "application/javascript"
+          },
+          {
+            "type": "src",
+            "value": "https://code.jquery.com/jquery-3.2.1.min.js"
+          },
+          {
+            "type": "integrity",
+            "value": "sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+          },
+          {
+            "type": "crossorigin",
+            "value": "anonymous"
+          }
+        ]
   }]
 },
 {
@@ -96,8 +100,10 @@ headData = [{
         }
       ]
   }]
-}];
-elements = [{
+}]
+},
+{
+  "elements": [{
   "elem": [{
     "type": "div",
     "attrs": [{
@@ -193,3 +199,4 @@ elements = [{
         }]
       }]
   }]
+}]
