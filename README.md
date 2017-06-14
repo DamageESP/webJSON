@@ -223,7 +223,7 @@ Example code:
       "text": "pag2",
       "attrs": [{
         "type": "onclick",
-        "value": "web.changeTo('pag2')"
+        "value": "web.init('pag2')"
         }]
       },
       {
@@ -231,7 +231,7 @@ Example code:
       "text": "pag3",
       "attrs": [{
         "type": "onclick",
-        "value": "web.changeTo('pag3')"
+        "value": "web.init('pag3')"
         }]
       },
       {
