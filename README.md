@@ -3,6 +3,25 @@ Generate dynamic websites with JSON-based HTML.
 Live example: damageesp.github.io/webJSON
 # Usage
 ## Quick overview
+All you need to start using your JSON files is to download webJSON.js and instantiate it when your document loads. Create `index.js` and do so, like this:
+```
+var web = new webJSON();
+window.onload = function() {
+  web.init();
+}
+```
+In your index page, include webJSON.js and the index.js to initialize webJSON, and start rolling.
+```
+<html>
+<head>
+  <script type="application/javascript" src="js/webJSON.js"></script>
+  <script type="application/javascript" src="js/index.js"></script>
+</head>
+<body>
+</body>
+</html>
+```
+After this, you are ready to start using `webJSON.changeTo('pageName')` to navigate through your JSON files live.
 ```
 [{
   "title": "myTitle" // Will set the document.title to myTitle.
