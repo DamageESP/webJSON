@@ -61,11 +61,11 @@ function webJSON() {
   this.init = function(file = "pag1") {
     this.loadJSON(file).then(function(response){
       for (var i=0; i<response.length; i++) {
-        if (response[i].hasOwnPropery("title")) {
+        if (response[i].title) {
           this.title = response[i].title;
-        } else if (response[i].hasOwnPropery("headData")) {
+        } else if (response[i].headData) {
           this.headData = response[i].headData;
-        } else if (response[i].hasOwnPropery("elements")) {
+        } else if (response[i].elements) {
           this.elements = response[i].elements;
         }
       }
