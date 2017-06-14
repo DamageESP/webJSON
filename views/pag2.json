@@ -1,5 +1,9 @@
-title = "myScripts2";
-headData = [{
+[
+  {
+    "title": "myScripts2"
+  },
+  {
+"headData" : [{
   "elem": [{
       "type": "script",
       "attrs": [
@@ -28,8 +32,10 @@ headData = [{
         }
       ]
   }]
-}];
-elements = [{
+}]
+},
+{
+  "elements": [{
   "elem": [{
       "type": "p",
       "text": "parrafo",
@@ -53,7 +59,7 @@ elements = [{
             "value": "web.changeTo('pag3')"
           }]
         }]
-    }],
+    }]
   },
   {
     "elem": [{
@@ -63,4 +69,5 @@ elements = [{
           "value": "https://www.w3schools.com/images/colorpicker.gif"
         }]
     }]
-}];
+}]
+}]

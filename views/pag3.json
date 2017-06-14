@@ -1,6 +1,9 @@
-title = "myScripts";
-
-elements = [{
+[
+  {
+    "title": "myScripts"
+  },
+  {
+    "elements": [{
   "elem": [{
     "type": "div",
     "text": "y0",
@@ -71,7 +74,7 @@ elements = [{
   },{
   "elem": [{
     "type": "h2",
-    "text": "mi h2",
+    "text": "mi h2"
     },{
       "type": "button",
       "text": "hey",
@@ -81,3 +84,4 @@ elements = [{
         }]
       }]
   }]
+}]

@@ -1,7 +1,7 @@
 function webJSON() {
 
   // Loop elems
-  this.loopElems = function(list = this.list, parent = document.getElementsByTagName("body")[0]) {
+  this.loopElems = function(list, parent = document.getElementsByTagName("body")[0]) {
     for (var i=0; i<list.length; i++) {
       if (!list[i].type) {
         this.loopElems(list[i].elem, parent);
@@ -44,6 +44,12 @@ function webJSON() {
 
   // Change JSON source file
   this.changeTo = function(file) {
+    this.loadJSON(file).then(function(response){
+      response[1].headData && web.head(response[1].headData);
+      document.title = response[0].title;
+      web.loopElems(response[2].elements);
+    });
+    /*
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "https://damageesp.github.io/webJSON/views/"+file+".json");
     xhr.responseType = "text";
@@ -54,7 +60,7 @@ function webJSON() {
         console.log(data);
       }
     }
-    /*var jsElm = document.createElement("script");
+    var jsElm = document.createElement("script");
     jsElm.type = "application/javascript";
     jsElm.src = "views/"+file+".json";
     document.head.appendChild(jsElm);
@@ -62,24 +68,26 @@ function webJSON() {
     this.init();*/
   }
 
-  // Initiate process
-  this.init = function() {
+  this.loadJSON = function (file = "pag1") {
     return new Promise(function(resolve, reject) {
       var xhr = new XMLHttpRequest();
-      xhr.open("GET", "https://damageesp.github.io/webJSON/views/pag1.json");
+      xhr.open("GET", "https://damageesp.github.io/webJSON/views/"+file+".json");
       xhr.responseType = "text";
       xhr.send();
       xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
-          resolve(xhr.response);
+          resolve(JSON.parse(xhr.response));
         }
-        console.log(JSON.parse(xhr.response));
       }
-      this.list = xhr.elements;
-    })
-  /*  this.list = this.xhr.elements;
-    this.xhr.headData && this.head(this.xhr.headData);
-    document.title = this.xhr.title;
-    this.loopElems();*/
+    });
+  }
+
+  // Initiate process
+  this.init = function() {
+    this.loadJSON().then(function(response){
+      response[1].headData && web.head(response[1].headData);
+      document.title = response[0].title;
+      web.loopElems(response[2].elements);
+    });
   }
 }
