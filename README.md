@@ -1,76 +1,142 @@
 # webJSON
 Generate dynamic websites with JSON-based HTML.
+Live example: damageesp.github.io/webJSON
 # Usage
-Create your custom HTML web page using the following JSON structure:
-* To set your page title, you can use `title = "my title"`
-* To include your head scripts, you can use `headData = [Array of elem]`
-Each one of these `elem` elements has to be an Object and has to have the properties `type` and `url`
-Example code:
+## Quick overview
 ```
-headData = [{
-  "elem": [{
+[{
+  "title": "myTitle" // Will set the document.title to myTitle.
+},{
+  "headData": [{ // Will modify the document.head contents exclusively.
+    "elem": [{
       "type": "script",
-      "attrs": [
-        {
-          "type": "type",
-          "value": "application/javascript"
-        },
-        {
-          "type": "src",
-          "value": "https://code.jquery.com/jquery-3.2.1.min.js"
-        },
-        {
-          "type": "integrity",
-          "value": "sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        },
-        {
-          "type": "crossorigin",
-          "value": "anonymous"
-        }
-      ]
+      "attrs": [{
+        "type": "src",
+        "value": "https://code.jquery.com/jquery-3.2.1.min.js"
+      }]
+    }]
   }]
-}
-];
+},{
+  "elements": [{ // Will modify the document.body contents exclusively.
+    "elem": [{
+      "type": "div",
+      "text": "Div inside body",
+      "elem": [{
+        "type": "h1",
+        "text": "Title inside div."
+      },{
+        "type": "p",
+        "text": "Paragraph inside div, after h1."
+      }]
+    }]
+  }]
+}]
 ```
-* To establish your elements in your page, you will have to create an `"elem"` object inside your `elements` variable. Then, follow with the type of element you want to create and add all you want to it.
+Create your custom HTML web page using the following JSON structure:
+* To set your page title, you can use `"title": "my title"`
+* To include your head scripts, you can use `"headData": [Array of elem]`
+Each one of these `elem` elements has to be an Object, and you can define its attributes inside the array `"attrs"`, each Object inside `attrs` will have to have a `type` and a `value`.
 Example code:
 ```
-elements = {
-  "elem": [
-    {
+[{
+  "headData": [{
+    "elem": [{
+        "type": "script",
+        "attrs": [
+          {
+            "type": "type",
+            "value": "application/javascript"
+          },
+          {
+            "type": "src",
+            "value": "https://code.jquery.com/jquery-3.2.1.min.js"
+          },
+          {
+            "type": "integrity",
+            "value": "sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+          },
+          {
+            "type": "crossorigin",
+            "value": "anonymous"
+          }
+        ]
+  }]
+}]
+```
+* To establish your elements in your page, you will have to create an `"elem"` object inside your `elements` Array. Then, follow with the type of element you want to create and add all you want to it. If you want an `elem` inside another `elem`, just put all `elem` Objects you want inside the `elem` key of the current Object.
+Example code:
+```
+[{
+  "elements": [{
+    "elem": [{
       "type": "div",
-      "text": "hey broder",
-      "attrs": [
-        {
-          "type": "style",
-          "value": "background:blue;color:white;"
-        }
-      ]
-   }
-}
+      "text": "Div inside body",
+      "elem": [{
+        "type": "h1",
+        "text": "Title inside div."
+      },{
+        "type": "p",
+        "text": "Paragraph inside div, after h1."
+      }]
+    }]
+  }]
+}]
 ```
 # Full example
 ```
-title = "myScripts";
-headData = [{
+[{
+  "title":"myScripts"
+},
+{
+  "headData": [{
+    "elem": [{
+        "type": "script",
+        "attrs": [
+          {
+            "type": "type",
+            "value": "application/javascript"
+          },
+          {
+            "type": "src",
+            "value": "https://code.jquery.com/jquery-3.2.1.min.js"
+          },
+          {
+            "type": "integrity",
+            "value": "sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+          },
+          {
+            "type": "crossorigin",
+            "value": "anonymous"
+          }
+        ]
+  }]
+},
+{
   "elem": [{
-      "type": "script",
+      "type": "link",
       "attrs": [
         {
-          "type": "type",
-          "value": "application/javascript"
+          "type": "rel",
+          "value": "stylesheet"
         },
         {
-          "type": "src",
-          "value": "https://code.jquery.com/jquery-3.2.1.min.js"
+          "type": "href",
+          "value": "css/style.css"
+        }
+      ]
+  }]
+},
+{
+  "elem": [{
+      "type": "link",
+      "attrs": [
+        {
+          "type": "rel",
+          "value": "icon"
         },
         {
-          "type": "integrity",
-          "value": "sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        },
-        {
-          "type": "crossorigin",
-          "value": "anonymous"
+          "type": "href",
+          "value": "img/fav1.png"
         }
       ]
   }]
@@ -119,56 +185,85 @@ headData = [{
         }
       ]
   }]
+}]
 },
 {
-  "elem": [{
-      "type": "link",
-      "attrs": [
-        {
-          "type": "rel",
-          "value": "stylesheet"
-        },
-        {
-          "type": "href",
-          "value": "css/style.css"
-        },
-        {
-          "type": "type",
-          "value": "text/css"
-        }
-      ]
-  }]
-}];
-elements = [{
+  "elements": [{
   "elem": [{
     "type": "div",
     "attrs": [{
       "type": "style",
       "value": "background:blue"
-      }],
+      },
+      {
+        "type": "class",
+        "value": "parrafo"
+        }],
     "elem": [{
       "type": "button",
-      "text": "1",
+      "text": "pag2",
       "attrs": [{
         "type": "onclick",
-        "value": "changeTo('pag2')"
+        "value": "web.changeTo('pag2')"
         }]
       },
       {
       "type": "button",
-      "text": "2"
+      "text": "pag3",
+      "attrs": [{
+        "type": "onclick",
+        "value": "web.changeTo('pag3')"
+        }]
       },
       {
         "type": "p",
-        "text": "dentro de blue hehe",
+        "text": "busca",
         "attrs": [{
-          "type": "style",
-          "value": "color:green"
-          },{
+          "type": "id",
+          "value": "parrafo"
+          }],
+        "elem": [{
+          "type":"input",
+          "attrs": [{
+            "type": "type",
+            "value": "text"
+            },
+            {
             "type": "id",
-            "value": "parrafo"
+            "value": "q"
             }]
+          },
+          {
+            "type":"input",
+            "attrs": [{
+              "type": "type",
+              "value": "number"
+              },
+              {
+              "type": "id",
+              "value": "maxR"
+              },
+              {
+              "type": "value",
+              "value": "5"
+              }]
+            },
+          {
+            "type": "button",
+            "text": "x",
+            "attrs": [{
+              "type": "onclick",
+              "value": "ytList.clear()"
+            }]
+          }]
         }]
+    }]
+  },
+  {
+    "type": "div",
+    "attrs": [{
+      "type": "id",
+      "value": "results"
     }]
   },
   {
@@ -179,15 +274,16 @@ elements = [{
   },{
   "elem": [{
     "type": "h2",
-    "text": "mi h2",
-    },{
-      "type": "button",
-      "text": "hey",
-      "attrs": [{
-        "type": "onclick",
-        "value": "myFunction()"
-        }]
+    "text": "mi h2"
+    },
+    {
+    "type": "button",
+    "text": "hey",
+    "attrs": [{
+      "type": "onclick",
+      "value": "myFunction()"
       }]
+    }]
   }]
-
+}]
 ```
