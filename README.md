@@ -21,7 +21,7 @@ In your index page, include webJSON.js and the index.js to initialize webJSON, a
 </body>
 </html>
 ```
-After this, you are ready to start using `webJSON.init('pageName')` to navigate through your JSON files live.
+After this, you are ready to start using `web.init('pageName')` to navigate through your JSON files live.
 ```
 [{
   "title": "myTitle" // Will set the document.title to myTitle.
