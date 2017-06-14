@@ -1,7 +1,6 @@
 var q = document.getElementById("q");
 var r = document.getElementById("maxR");
 var det = document.getElementsByTagName("a");
-console.log(det);
 var ytList = new ytList();
 q.onkeypress = function(e) {
   if (e.which == "13") {
@@ -58,10 +57,6 @@ function ytList(vids){
           {
             type: "img",
             attrs: [{type: "src", value: list.items[i].snippet.thumbnails.default.url}]
-          },
-          {
-            type: "p",
-            text: "as"
           }]
         });
       }

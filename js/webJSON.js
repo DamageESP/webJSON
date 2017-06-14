@@ -47,25 +47,9 @@ function webJSON() {
     this.loadJSON(file).then(function(response){
       response[1].headData && web.head(response[1].headData);
       document.title = response[0].title;
+      document.body.innerHTML = "";
       web.loopElems(response[2].elements);
     });
-    /*
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://damageesp.github.io/webJSON/views/"+file+".json");
-    xhr.responseType = "text";
-    xhr.send();
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4) {
-        var data = xhr.response;
-        console.log(data);
-      }
-    }
-    var jsElm = document.createElement("script");
-    jsElm.type = "application/javascript";
-    jsElm.src = "views/"+file+".json";
-    document.head.appendChild(jsElm);
-    document.body.innerHTML = "";
-    this.init();*/
   }
 
   this.loadJSON = function (file = "pag1") {
