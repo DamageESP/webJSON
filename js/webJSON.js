@@ -42,17 +42,8 @@ function webJSON() {
     }
   }
 
-  // Change JSON source file
-  this.changeTo = function(file) {
-    this.loadJSON(file).then(function(response){
-      response[1].headData && web.head(response[1].headData);
-      document.title = response[0].title;
-      document.body.innerHTML = "";
-      web.loopElems(response[2].elements);
-    });
-  }
-
-  this.loadJSON = function (file = "pag1") {
+  // Load JSON elements async. and return them through resolve(response)
+  this.loadJSON = function (file) {
     return new Promise(function(resolve, reject) {
       var xhr = new XMLHttpRequest();
       xhr.open("GET", "https://damageesp.github.io/webJSON/views/"+file+".json");
@@ -66,12 +57,22 @@ function webJSON() {
     });
   }
 
-  // Initiate process
-  this.init = function() {
-    this.loadJSON().then(function(response){
-      response[1].headData && web.head(response[1].headData);
-      document.title = response[0].title;
-      web.loopElems(response[2].elements);
+  // Initiate the JSON file
+  this.init = function(file = "pag1") {
+    this.loadJSON(file).then(function(response){
+      for (var i=0; i<response.length; i++) {
+        if (response[i].hasOwnPropery("title")) {
+          this.title = response[i].title;
+        } else if (response[i].hasOwnPropery("headData")) {
+          this.headData = response[i].headData;
+        } else if (response[i].hasOwnPropery("elements")) {
+          this.elements = response[i].elements;
+        }
+      }
+      this.headData && web.head(this.headData);
+      document.title = this.title;
+      document.body.innerHTML = "";
+      web.loopElems(this.elements);
     });
   }
 }
