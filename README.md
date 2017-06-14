@@ -7,7 +7,7 @@ All you need to start using your JSON files is to download webJSON.js and instan
 ```
 var web = new webJSON();
 window.onload = function() {
-  web.init();
+  web.init('yourIndexPage'); // Default: 'pag1'
 }
 ```
 In your index page, include webJSON.js and the index.js to initialize webJSON, and start rolling.
@@ -21,7 +21,7 @@ In your index page, include webJSON.js and the index.js to initialize webJSON, a
 </body>
 </html>
 ```
-After this, you are ready to start using `webJSON.changeTo('pageName')` to navigate through your JSON files live.
+After this, you are ready to start using `webJSON.init('pageName')` to navigate through your JSON files live.
 ```
 [{
   "title": "myTitle" // Will set the document.title to myTitle.
