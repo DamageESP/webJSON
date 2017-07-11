@@ -1,78 +1,86 @@
-function webJSON() {
-
+var webJSON = {
+  headData: undefined,
+  elements: undefined,
+  title: undefined,
+  newElem: undefined,
   // Loop elems
-  this.loopElems = function(list, parent = document.getElementsByTagName("body")[0]) {
+  loopElems: function(list, parent = document.getElementsByTagName("body")[0]) {
     for (var i=0; i<list.length; i++) {
       if (!list[i].type) {
-        this.loopElems(list[i].elem, parent);
+        webJSON.loopElems(list[i].elem, parent);
       }
       else
       {
-        this.newElem = this.createElement(list[i], parent);
+        webJSON.newElem = webJSON.createElement(list[i], parent);
         if (list[i].elem) {
-          parent = this.newElem;
-          this.loopElems(list[i].elem, parent);
+          parent = webJSON.newElem;
+          webJSON.loopElems(list[i].elem, parent);
         }
       }
     }
-  }
+  },
 
   // Create element
-  this.createElement = function(elem, parent) {
-        this.newElem = document.createElement(elem.type);
+  createElement: function(elem, parent) {
+        webJSON.newElem = document.createElement(elem.type);
         // Set innerHTML via .text property
         if (elem.text) {
-          this.newElem.innerHTML = elem.text;
+          webJSON.newElem.innerHTML = elem.text;
         }
         // Set attributes
         if (elem.attrs) {
           for (var j = 0; j < elem.attrs.length; j++) {
-            this.newElem.setAttribute(elem.attrs[j].type, elem.attrs[j].value);
+            webJSON.newElem.setAttribute(elem.attrs[j].type, elem.attrs[j].value);
           }
         }
-        parent.appendChild(this.newElem);
-        return this.newElem;
-  }
+        parent.appendChild(webJSON.newElem);
+        return webJSON.newElem;
+  },
 
   // Populate HEAD with scripts
-  this.head = function(data = headData) {
+  head: function(data = webJSON.headData) {
     document.head.innerHTML = "";
     for (var i=0; i<data.length; i++) {
-      this.loopElems(data[i].elem, document.head);
+      webJSON.loopElems(data[i].elem, document.head);
     }
-  }
+  },
 
   // Load JSON elements async. and return them through resolve(response)
-  this.loadJSON = function (file) {
+  loadJSON: function(file) {
     return new Promise(function(resolve, reject) {
       var xhr = new XMLHttpRequest();
       xhr.open("GET", "https://damageesp.github.io/webJSON/views/"+file+".json");
-      xhr.responseType = "text";
+      xhr.responseType = "json";
       xhr.send();
       xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
-          resolve(JSON.parse(xhr.response));
+          resolve(xhr.response);
         }
       }
     });
-  }
+  },
 
   // Initiate the JSON file
-  this.init = function(file = "pag1") {
-    this.loadJSON(file).then(function(response){
+  init: function(file = "pag1") {
+    if (!file) {
+      file = window.location.pathname.split("/").pop();
+    }
+    webJSON.loadJSON(file).then(function(response){
       for (var i=0; i<response.length; i++) {
         if (response[i].title) {
-          this.title = response[i].title;
+          webJSON.title = response[i].title;
         } else if (response[i].headData) {
-          this.headData = response[i].headData;
+          webJSON.headData = response[i].headData;
         } else if (response[i].elements) {
-          this.elements = response[i].elements;
+          webJSON.elements = response[i].elements;
         }
       }
-      this.headData && web.head(this.headData);
-      document.title = this.title;
-      document.body.innerHTML = "";
-      web.loopElems(this.elements);
+      webJSON.headData && webJSON.head(webJSON.headData);
+      document.title = webJSON.title;
+      webJSON.elements && (document.body.innerHTML = "");
+      webJSON.loopElems(webJSON.elements);
+    }).catch(function(response){
+      console.log("json load status: "+response);
     });
   }
 }

@@ -119,7 +119,7 @@
       "text": "pag2",
       "attrs": [{
         "type": "onclick",
-        "value": "web.init('pag2')"
+        "value": "webJSON.init('pag2')"
         }]
       },
       {
@@ -127,7 +127,7 @@
       "text": "pag3",
       "attrs": [{
         "type": "onclick",
-        "value": "web.init('pag3')"
+        "value": "webJSON.init('pag3')"
         }]
       },
       {
